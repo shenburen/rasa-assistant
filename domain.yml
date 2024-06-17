@@ -1,0 +1,32 @@
+version: "3.1"
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+intents:
+  - greet
+  - goodbye
+  - query_user
+
+entities:
+  - user
+
+slots:
+  user:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: user
+
+responses:
+  utter_greet:
+    - text: 你好，我是净月吴彦祖。
+  utter_goodbye:
+    - text: 净月吴彦祖对你说再见。
+
+actions:
+  - utter_greet
+  - utter_goodbye
+  - action_query_user

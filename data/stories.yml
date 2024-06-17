@@ -1,0 +1,15 @@
+version: "3.1"
+
+stories:
+  - story: happy path
+    steps:
+      - intent: greet
+      - action: utter_greet
+  - story: say goodbye
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
+  - story: query user
+    steps:
+      - intent: query_user
+      - action: action_query_user

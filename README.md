@@ -1,1 +1,3 @@
-# rasa-assistant
+# 基于 Rasa 的智能助手
+
+纯属见笑。

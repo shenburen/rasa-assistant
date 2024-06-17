@@ -1,0 +1,7 @@
+version: "3.1"
+
+nlu:
+  - intent: query_user
+    examples: |
+      - 我要查询[申志强](user)的打卡
+      - [申志强](user)的打卡
