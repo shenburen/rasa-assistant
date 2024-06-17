@@ -14,8 +14,9 @@ intents:
 
 entities:
   - date
-  - user
-  - month
+  - clock_in_user
+  - clock_in_month
+  - clock_in_type
 
 slots:
   date:
@@ -24,18 +25,24 @@ slots:
     mappings:
       - type: from_entity
         entity: date
-  user:
+  clock_in_user:
     type: text
     influence_conversation: false
     mappings:
       - type: from_entity
-        entity: user
-  month:
+        entity: clock_in_user
+  clock_in_month:
     type: text
     influence_conversation: false
     mappings:
       - type: from_entity
-        entity: month
+        entity: clock_in_month
+  clock_in_type:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: clock_in_type
 
 responses:
   utter_greet:

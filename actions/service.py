@@ -3,6 +3,7 @@ from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 
+from actions.common import month_to_int
 from db.connect import get_userid
 
 
@@ -16,8 +17,9 @@ class ActionServiceUser(Action):
         tracker: Tracker,
         domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
-        text_user = tracker.get_slot("user")
-        text_month = tracker.get_slot("month")
-        id = get_userid(text_user)
-        dispatcher.utter_message(text=text_user + "-" + id + "-" + text_month)
+        user = tracker.get_slot("clock_in_user")
+        month = month_to_int(tracker.get_slot("clock_in_month"))
+        type = tracker.get_slot("clock_in_type")
+        id = get_userid(user)
+        dispatcher.utter_message(text=user + "-" + id + "-" + str(month) + "-" + type)
         return []

@@ -18,3 +18,30 @@ def date_to_int(text):
         return -2
     else:
         return None
+
+
+def month_to_int(text):
+    if text == "一月":
+        return 1
+    elif text == "二月":
+        return 2
+    elif text == "三月":
+        return 3
+    elif text == "四月":
+        return 4
+    elif text == "五月":
+        return 5
+    elif text == "六月":
+        return 6
+    elif text == "七月":
+        return 7
+    elif text == "八月":
+        return 8
+    elif text == "九月":
+        return 9
+    elif text == "十月":
+        return 10
+    elif text == "十一月":
+        return 11
+    elif text == "十二月":
+        return 12
