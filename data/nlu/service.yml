@@ -3,5 +3,5 @@ version: "3.1"
 nlu:
   - intent: service_user
     examples: |
-      - 我要查询[申志强](user)的打卡
-      - [申志强](user)的打卡
+      - 我要查询[申志强](user)[五月](month)的打卡记录
+      - [申志强](user)[六月](month)的打卡记录

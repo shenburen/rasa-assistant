@@ -17,6 +17,7 @@ class ActionServiceUser(Action):
         domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
         text_user = tracker.get_slot("user")
+        text_month = tracker.get_slot("month")
         id = get_userid(text_user)
-        dispatcher.utter_message(text=id)
+        dispatcher.utter_message(text=text_user + "-" + id + "-" + text_month)
         return []

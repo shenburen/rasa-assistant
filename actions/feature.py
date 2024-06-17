@@ -4,23 +4,7 @@ from datetime import datetime, timedelta
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 
-
-weekday_mapping = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期天"]
-
-
-def text_date_to_int(text_date):
-    if text_date == "今天":
-        return 0
-    elif text_date == "明天":
-        return 1
-    elif text_date == "后天":
-        return 2
-    elif text_date == "昨天":
-        return -1
-    elif text_date == "前天":
-        return -2
-    else:
-        return None
+from actions.common import date_to_int, int_to_weekend
 
 
 class ActionFeatureTime(Action):
@@ -33,8 +17,8 @@ class ActionFeatureTime(Action):
         tracker: Tracker,
         domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
-        current_time = datetime.now().strftime("%H:%M:%S")
-        dispatcher.utter_message(text=current_time)
+        current = datetime.now().strftime("%H:%M:%S")
+        dispatcher.utter_message(text=current)
         return []
 
 
@@ -48,17 +32,13 @@ class ActionFeatureDate(Action):
         tracker: Tracker,
         domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
-        text_date = tracker.get_slot("date") or "今天"
-        int_date = text_date_to_int(text_date)
-        if int_date is not None:
-            delta = timedelta(days=int_date)
-            current_date = datetime.now()
-            target_date = current_date + delta
-            dispatcher.utter_message(text=target_date.strftime("%Y-%m-%d"))
+        date = tracker.get_slot("date") or "今天"
+        int = date_to_int(date)
+        if int is not None:
+            target = datetime.now() + timedelta(days=int)
+            dispatcher.utter_message(text=target.strftime("%Y-%m-%d"))
         else:
-            dispatcher.utter_message(
-                text="系统暂不支持'{}'的日期查询".format(text_date)
-            )
+            dispatcher.utter_message(text="系统暂不支持'{}'的日期查询".format(date))
         return []
 
 
@@ -72,15 +52,11 @@ class ActionFeatureWeekday(Action):
         tracker: Tracker,
         domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
-        text_date = tracker.get_slot("date") or "今天"
-        int_date = text_date_to_int(text_date)
-        if int_date is not None:
-            delta = timedelta(days=int_date)
-            current_date = datetime.now()
-            target_date = current_date + delta
-            dispatcher.utter_message(text=weekday_mapping[target_date.weekday()])
+        date = tracker.get_slot("date") or "今天"
+        int = date_to_int(date)
+        if int is not None:
+            target = datetime.now() + timedelta(days=int)
+            dispatcher.utter_message(text=int_to_weekend(target.weekday()))
         else:
-            dispatcher.utter_message(
-                text="系统暂不支持'{}'的星期查询".format(text_date)
-            )
+            dispatcher.utter_message(text="系统暂不支持'{}'的星期查询".format(date))
         return []
