@@ -9,7 +9,21 @@ stories:
     steps:
       - intent: goodbye
       - action: utter_goodbye
-  - story: query user
+
+  - story: feature time
     steps:
-      - intent: query_user
-      - action: action_query_user
+      - intent: feature_time
+      - action: action_feature_time
+  - story: feature date
+    steps:
+      - intent: feature_date
+      - action: action_feature_date
+  - story: feature weekday
+    steps:
+      - intent: feature_weekday
+      - action: action_feature_weekday
+
+  - story: service user
+    steps:
+      - intent: service_user
+      - action: action_service_user

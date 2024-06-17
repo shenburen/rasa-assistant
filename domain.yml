@@ -7,12 +7,22 @@ session_config:
 intents:
   - greet
   - goodbye
-  - query_user
+  - feature_time
+  - feature_date
+  - feature_weekday
+  - service_user
 
 entities:
+  - date
   - user
 
 slots:
+  date:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: date
   user:
     type: text
     influence_conversation: false
@@ -29,4 +39,7 @@ responses:
 actions:
   - utter_greet
   - utter_goodbye
-  - action_query_user
+  - action_feature_time
+  - action_feature_date
+  - action_feature_weekday
+  - action_service_user
