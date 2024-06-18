@@ -1,115 +1,51 @@
 const { createApp, ref } = Vue;
 
 createApp({
-  setup() {
-    const input = ref("123");
-    const message = ref([
-      {
-        sender: "shenzhiqiang",
-        message: "你好",
-      },
-      {
-        recipient_id: "shenzhiqiang",
-        text: "我很好",
-      },
-      {
-        sender: "shenzhiqiang",
-        message: "你好",
-      },
-      {
-        recipient_id: "shenzhiqiang",
-        text: "我很好",
-      },
-      {
-        sender: "shenzhiqiang",
-        message: "你好",
-      },
-      {
-        recipient_id: "shenzhiqiang",
-        text: "我很好",
-      },
-      {
-        sender: "shenzhiqiang",
-        message: "你好",
-      },
-      {
-        recipient_id: "shenzhiqiang",
-        text: "我很好",
-      },
-      {
-        sender: "shenzhiqiang",
-        message: "你好",
-      },
-      {
-        recipient_id: "shenzhiqiang",
-        text: "我很好",
-      },
-      {
-        sender: "shenzhiqiang",
-        message: "你好",
-      },
-      {
-        recipient_id: "shenzhiqiang",
-        text: "我很好",
-      },
-      {
-        sender: "shenzhiqiang",
-        message: "你好",
-      },
-      {
-        recipient_id: "shenzhiqiang",
-        text: "我很好",
-      },
-      {
-        sender: "shenzhiqiang",
-        message: "你好",
-      },
-      {
-        recipient_id: "shenzhiqiang",
-        text: "我很好",
-      },
-      {
-        sender: "shenzhiqiang",
-        message: "你好",
-      },
-      {
-        recipient_id: "shenzhiqiang",
-        text: "我很好",
-      },
-      {
-        sender: "shenzhiqiang",
-        message: "你好",
-      },
-      {
-        recipient_id: "shenzhiqiang",
-        text: "我很好",
-      },
-      {
-        sender: "shenzhiqiang",
-        message: "你好",
-      },
-      {
-        recipient_id: "shenzhiqiang",
-        text: "我很好",
-      },
-      {
-        sender: "shenzhiqiang",
-        message: "你好",
-      },
-      {
-        recipient_id: "shenzhiqiang",
-        text: "我很好",
-      },
-    ]);
+  data() {
     return {
-      input,
-      message,
+      input: "",
+      message: [],
     };
+  },
+  mounted() {
+    axios({
+      method: "post",
+      url: "http://localhost:5005/webhooks/rest/webhook",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: JSON.stringify({
+        sender: "shenzhiqiang",
+        message: "你好",
+      }),
+    }).then((res) => {
+      this.message.push(res.data[0]);
+    });
   },
   methods: {
     submit() {
-      alert(1);
+      let text = this.input;
+      this.input = "";
+      this.message.push({
+        sender: "shenzhiqiang",
+        message: text,
+      });
+      axios({
+        method: "post",
+        url: "http://localhost:5005/webhooks/rest/webhook",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: JSON.stringify({
+          sender: "shenzhiqiang",
+          message: text,
+        }),
+      }).then((res) => {
+        this.message.push(res.data[0]);
+      });
     },
-    clear() {},
+    clear() {
+      this.message = [];
+    },
   },
 }).mount("#app");
