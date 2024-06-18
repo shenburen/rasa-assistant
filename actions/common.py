@@ -1,5 +1,8 @@
 weekday_mapping = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期天"]
 
+# 每个月的日数-闰年
+month_days = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
 
 def int_to_weekend(int):
     return weekday_mapping[int]
@@ -45,3 +48,12 @@ def month_to_int(text):
         return 11
     elif text == "十二月":
         return 12
+
+
+def type_to_int(text):
+    if text == "打卡正常":
+        return 0
+    elif text == "打卡异常":
+        return 1
+    elif text == "缺卡":
+        return 99
