@@ -8,18 +8,9 @@ createApp({
     };
   },
   mounted() {
-    axios({
-      method: "post",
-      url: "http://localhost:5005/webhooks/rest/webhook",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: JSON.stringify({
-        sender: "shenzhiqiang",
-        message: "你好",
-      }),
-    }).then((res) => {
-      this.message.push(res.data[0]);
+    this.postMessage({
+      sender: "shenzhiqiang",
+      message: "你好",
     });
   },
   methods: {
@@ -30,22 +21,25 @@ createApp({
         sender: "shenzhiqiang",
         message: text,
       });
+      this.postMessage({
+        sender: "shenzhiqiang",
+        message: text,
+      });
+    },
+    clear() {
+      this.message = [];
+    },
+    postMessage(obj) {
       axios({
         method: "post",
         url: "http://localhost:5005/webhooks/rest/webhook",
         headers: {
           "Content-Type": "application/json",
         },
-        data: JSON.stringify({
-          sender: "shenzhiqiang",
-          message: text,
-        }),
+        data: JSON.stringify(obj),
       }).then((res) => {
         this.message.push(res.data[0]);
       });
-    },
-    clear() {
-      this.message = [];
     },
   },
 }).mount("#app");
