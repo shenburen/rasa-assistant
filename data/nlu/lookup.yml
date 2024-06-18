@@ -15,8 +15,3 @@ nlu:
       - 十月
       - 十一月
       - 十二月
-  - lookup: clock_in_type
-    examples: |
-      - 打卡正常
-      - 打卡异常
-      - 缺卡

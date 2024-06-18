@@ -19,7 +19,6 @@ class ActionServiceUser(Action):
     ) -> List[Dict[Text, Any]]:
         user = tracker.get_slot("clock_in_user")
         month = month_to_int(tracker.get_slot("clock_in_month"))
-        type = type_to_int(tracker.get_slot("clock_in_type"))
-        data = get_clock_in(user, month, type)
+        data = get_clock_in(user, month)
         dispatcher.utter_message(text=data)
         return []
