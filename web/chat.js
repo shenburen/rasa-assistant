@@ -1,4 +1,4 @@
-const { createApp, ref } = Vue;
+const { createApp } = Vue;
 
 createApp({
   data() {
@@ -38,8 +38,20 @@ createApp({
         },
         data: JSON.stringify(obj),
       }).then((res) => {
-        this.message.push(res.data[0]);
+        if (res.data.length < 1) {
+          return;
+        }
+        let result = this.checkMessage(res.data[0]);
       });
+    },
+    checkMessage(message) {
+      let result = message;
+      try {
+        result.json = JSON.parse(message.text);
+      } catch (error) {
+        console.info(error);
+      }
+      return result;
     },
   },
 }).mount("#app");
