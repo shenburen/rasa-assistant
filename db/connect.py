@@ -4,10 +4,6 @@ from datetime import datetime, timedelta
 
 from actions.common import month_days
 
-db = mysql.connector.connect(
-    host="localhost", user="root", password="shenzhiqiang", database="test"
-)
-
 
 def get_clock_in(user, month):
 
@@ -17,9 +13,16 @@ def get_clock_in(user, month):
     sql += " and end_time < '2024-" + str(month + 1) + "-1'"
     sql += " order by start_time"
 
+    db = mysql.connector.connect(
+        host="localhost", user="root", password="shenzhiqiang", database="test"
+    )
+
     cursor = db.cursor()
     cursor.execute(sql)
     rows = cursor.fetchall()
+
+    cursor.close()
+    db.close()
 
     data = {"type": "echarts-calendar", "month": "2024-" + str(month), "list": []}
 

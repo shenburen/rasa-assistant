@@ -9,27 +9,36 @@ createApp({
     };
   },
   mounted() {
+    // 第一次进入的时候主动向用户打招呼
     this.postMessage({
       sender: "shenzhiqiang",
       message: "你好",
     });
   },
   methods: {
+    // 提交请求
     submit() {
       let text = this.input;
       this.input = "";
+
       this.message.push({
         sender: "shenzhiqiang",
         message: text,
       });
+      setTimeout(() => {
+        this.scrollToBottom();
+      }, 0);
+
       this.postMessage({
         sender: "shenzhiqiang",
         message: text,
       });
     },
+    // 清空记录
     clear() {
       this.message = [];
     },
+    // 发送请求
     postMessage(obj) {
       this.showWait = true;
       axios({
@@ -53,11 +62,13 @@ createApp({
             echarts: result.class,
           });
           setTimeout(() => {
+            this.scrollToBottom();
             this.createEcharts(result);
           }, 0);
         }
       });
     },
+    // 判断返回的信息是普通信息还是其它信息
     checkMessage(message) {
       let result = message;
       try {
@@ -67,6 +78,15 @@ createApp({
       }
       return result;
     },
+    // 滚动条滚到最底下
+    scrollToBottom() {
+      let body = document.querySelector(".body");
+      body.scrollTo({
+        top: body.scrollHeight,
+        behavior: "smooth",
+      });
+    },
+    // 根据类型创建图表
     createEcharts(result) {
       switch (result.json.type) {
         case "echarts-calendar":
