@@ -36,22 +36,64 @@
 .user {
     margin: 10px;
     padding: 10px;
-    border-radius: 8px;
-    border: 1px solid gray;
+    border-radius: 8px 0 0 8px;
+    background-color: gray;
 }
 
 .assistant {
     margin: 10px;
     padding: 10px;
-    border-radius: 8px;
-    background-color: gray;
+    border: 1px solid gray;
+    border-radius: 0 8px 8px 0;
 }
 
 .echarts {
     height: 400px;
     margin: 10px;
     padding: 10px;
-    border-radius: 8px;
+    border: 1px solid gray;
+    border-radius: 0 8px 8px 0;
+}
+
+.chat-wait {
+    margin: 10px;
+    padding: 10px;
+    display: inline-block;
+    border: 1px solid gray;
+    border-radius: 0 8px 8px 0;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    margin: 0 5px;
+    border-radius: 100%;
+    background-color: #B4B4BE;
+    transform: scale(0);
+    animation: shrink_grow 1.2s ease infinite;
+}
+
+.dot-2 {
+    animation-delay: 0.2s;
+}
+
+.dot-3 {
+    animation-delay: 0.4s;
+}
+
+@keyframes shrink_grow {
+    0% {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(0);
+    }
 }
 
 /* 脚部 */

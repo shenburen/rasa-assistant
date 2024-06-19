@@ -21,6 +21,13 @@
                     <div class="assistant" v-if="item.recipient_id">{{item.text}}</div>
                     <div class="echarts" v-if="item.echarts" :class="item.echarts"></div>
                 </div>
+                <div class="message" v-show="showWait">
+                    <div class="chat-wait">
+                        <span class="dot dot-1"></span>
+                        <span class="dot dot-2"></span>
+                        <span class="dot dot-3"></span>
+                    </div>
+                </div>
             </div>
             <div class="footer">
                 <div class="footer-left">

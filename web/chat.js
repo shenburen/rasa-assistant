@@ -5,6 +5,7 @@ createApp({
     return {
       input: "",
       message: [],
+      showWait: false,
     };
   },
   mounted() {
@@ -30,6 +31,7 @@ createApp({
       this.message = [];
     },
     postMessage(obj) {
+      this.showWait = true;
       axios({
         method: "post",
         url: "http://localhost:5005/webhooks/rest/webhook",
@@ -41,6 +43,7 @@ createApp({
         if (res.data.length < 1) {
           return;
         }
+        this.showWait = false;
         let result = this.checkMessage(res.data[0]);
         if (!result.json) {
           this.message.push(result);
