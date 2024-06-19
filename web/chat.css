@@ -3,6 +3,7 @@
     inset: 0;
 }
 
+/* 肩部 */
 .frame {
     position: absolute;
     top: 50%;
@@ -22,6 +23,7 @@
     text-align: center;
 }
 
+/* 臀部 */
 .body {
     height: calc(100% - 180px);
     overflow: auto;
@@ -45,6 +47,14 @@
     background-color: gray;
 }
 
+.echarts {
+    height: 400px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* 脚部 */
 .footer {
     height: 80px;
     margin-top: 20px;

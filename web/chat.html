@@ -19,11 +19,12 @@
                 <div class="messages" v-for="item in message">
                     <div class="user" v-if="item.sender">{{item.message}}</div>
                     <div class="assistant" v-if="item.recipient_id">{{item.text}}</div>
+                    <div class="echarts" v-if="item.echarts" :class="item.echarts"></div>
                 </div>
             </div>
             <div class="footer">
                 <div class="footer-left">
-                    <textarea class="input" v-model="input"></textarea>
+                    <textarea class="input" v-model="input" @keyup.enter="submit"></textarea>
                 </div>
                 <div class="footer-right">
                     <button class="btn" @click="submit">提交</button>
