@@ -21,7 +21,7 @@ def get_clock_in(user, month):
     cursor.execute(sql)
     rows = cursor.fetchall()
 
-    data = {"type": "echarts-calendar", "list": []}
+    data = {"type": "echarts-calendar", "month": "2024-" + str(month), "list": []}
 
     row_index = 0
     for i in range(0, month_days[month - 1]):

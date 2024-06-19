@@ -65,6 +65,14 @@ createApp({
       return result;
     },
     createEcharts(result) {
+      switch (result.json.type) {
+        case "echarts-calendar":
+          this.createCalendar(result);
+          break;
+      }
+    },
+    // 日历图
+    createCalendar(result) {
       let dom = document.querySelector("." + result.class);
       let chart = echarts.init(dom);
 
@@ -78,12 +86,12 @@ createApp({
             orient: "vertical",
             dayLabel: {
               firstDay: 1,
-              nameMap: "cn",
+              nameMap: "ZH",
             },
             monthLabel: {
               show: false,
             },
-            range: "2024-6",
+            range: result.json.month,
           },
         ],
         series: [
